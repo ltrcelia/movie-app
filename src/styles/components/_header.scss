@@ -4,13 +4,15 @@
     text-shadow: 2px 3px 0px $color-1;
     text-align: center;
     letter-spacing: 2px;
+    padding-top: 50px;
+    padding-bottom: 25px;
   }
   nav {
     position: absolute;
     top: 16px;
     left: 16px;
     font-size: 1.3rem;
-
+    padding: 10px;
     ul {
       display: flex;
 

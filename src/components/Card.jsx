@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Card = ({ movie }) => {
+  const [isAdded, setIsAdded] = useState(false);
   const releaseDate = new Date(movie.release_date);
   const formattedReleaseDate = releaseDate.toLocaleDateString("fr-FR");
 
@@ -79,15 +80,16 @@ const Card = ({ movie }) => {
 
     if (!storedData.includes(movie.id.toString())) {
       storedData.push(movie.id);
-      window.localStorage.movies = storedData;
+      window.localStorage.movies = storedData.join(",");
+      setIsAdded(true);
     }
   };
 
   const deleteStorage = () => {
     let storedData = window.localStorage.movies.split(",");
-    let newData = storedData.filter((id) => id != movie.id);
+    let newData = storedData.filter((id) => id !== movie.id.toString());
 
-    window.localStorage.movies = newData;
+    window.localStorage.movies = newData.join(",");
   };
 
   return (
@@ -116,7 +118,7 @@ const Card = ({ movie }) => {
       <p>{movie.overview}</p>
       {movie.genre_ids ? (
         <div className="btn" onClick={() => addStorage()}>
-          Ajouter aux coups de coeur
+          {isAdded ? "Ajouté aux coups de coeur" : "Ajouter aux coups de coeur"}
         </div>
       ) : (
         <div
